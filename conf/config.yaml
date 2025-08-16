@@ -1,24 +1,28 @@
 misc:
-  input_list: "data/example.list"
-  output_dir: "data/example_result"
-  device: "cuda"
+#  input_list: "data/example.list"
+#  output_dir: "data/example_result"
+#  input_list: "data/voxconverse_dev.list"
+#  output_dir: "data/voxconverse_dev_result"
+  input_list: "data/voxconverse_test.list"
+  output_dir: "data/voxconverse_test_result"
+  device: "mps"
 audio:
   sr: 16000
 vad:
   ref_vad: false
   merge_vad: false
   ref_suffix: ".lab"
-  pyannote_token: PUT YOUR PYANNOTE TOKEN IN HERE
-  min_duration_on: 0.1
-  min_duration_off: 0.1
+  pyannote_token: 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
+  min_duration_on: 0.3
+  min_duration_off: 0.3
 embedding:
   win_length: 1.5
   hop_length: 0.5
 cluster:
   num_cluster: None
-  threshold: 0.8
+  threshold: 0.744
   normalize: false
 eval:
   run: true
   collar: 0.25
-  ignore_overlaps: false
+  ignore_overlaps: true
