@@ -20,7 +20,7 @@ embedding:
   hop_length: 0.5
 cluster:
   num_cluster: None
-  threshold: 0.744
+  threshold: 0.75
   normalize: false
 eval:
   run: true
