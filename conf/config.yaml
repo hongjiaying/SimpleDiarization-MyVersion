@@ -1,10 +1,10 @@
 misc:
 #  input_list: "data/example.list"
 #  output_dir: "data/example_result"
-#  input_list: "data/voxconverse_dev.list"
-#  output_dir: "data/voxconverse_dev_result"
-  input_list: "data/voxconverse_test.list"
-  output_dir: "data/voxconverse_test_result"
+  input_list: "data/voxconverse_dev.list"
+  output_dir: "data/voxconverse_dev_result"
+#  input_list: "data/voxconverse_test.list"
+#  output_dir: "data/voxconverse_test_result"
   device: "mps"
 audio:
   sr: 16000
@@ -13,16 +13,22 @@ vad:
   merge_vad: false
   ref_suffix: ".lab"
   pyannote_token: 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
-  min_duration_on: 0.3
-  min_duration_off: 0.3
+  min_duration_on: 0.1
+  min_duration_off: 0.1
 embedding:
   win_length: 1.5
   hop_length: 0.5
+
+  win_length_list: [ 1.5, 1.0]
+  hop_length_list: [ 0.75, 0.5]
+  base_win: 0.5
+  base_hop: 0.25
+
 cluster:
   num_cluster: None
-  threshold: 0.75
+  threshold: 0.72
   normalize: false
 eval:
   run: true
   collar: 0.25
-  ignore_overlaps: true
+  ignore_overlaps: false
