@@ -74,8 +74,8 @@ def read_inputlist(input_list):
 #             f_output.write(output_string + '\n')
 
 
-
-def write_rttm(SEC_tuples, out_rttm_file, min_dur=1e-2):
+#写的时候小于0.02s的段就不写了
+def write_rttm(SEC_tuples, out_rttm_file, min_dur=2e-2):
     """
     写 RTTM 时做防守：
     - 统一保证 end >= start

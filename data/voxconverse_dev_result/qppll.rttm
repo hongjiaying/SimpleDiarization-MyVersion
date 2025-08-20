@@ -1,6 +1,4 @@
-SPEAKER qppll 1 0.031 21.500 <NA> <NA> 0 <NA> <NA>
-SPEAKER qppll 1 22.281 0.250 <NA> <NA> 1 <NA> <NA>
-SPEAKER qppll 1 23.281 20.000 <NA> <NA> 0 <NA> <NA>
-SPEAKER qppll 1 43.585 0.500 <NA> <NA> 0 <NA> <NA>
-SPEAKER qppll 1 44.851 1.250 <NA> <NA> 0 <NA> <NA>
-SPEAKER qppll 1 47.062 22.250 <NA> <NA> 0 <NA> <NA>
+SPEAKER qppll 1 0.031 43.352 <NA> <NA> 0 <NA> <NA>
+SPEAKER qppll 1 43.585 0.675 <NA> <NA> 0 <NA> <NA>
+SPEAKER qppll 1 44.851 1.299 <NA> <NA> 0 <NA> <NA>
+SPEAKER qppll 1 47.062 22.494 <NA> <NA> 0 <NA> <NA>
