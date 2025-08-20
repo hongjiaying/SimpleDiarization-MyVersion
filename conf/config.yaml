@@ -50,7 +50,7 @@ msdd:
   base_overlap_thr: 0.5
   lr: 3.0e-4
   batch_size: 1
-  max_epochs: 1
+  max_epochs: 10
   infer_thr: 0.5     # ↑ 推理阈值，下面补丁会用到
 
 
