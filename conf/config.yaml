@@ -7,7 +7,7 @@ misc:
 #  output_dir: "data/voxconverse_test_result"
 #  input_list: "data/voxconverse_dev_small.list"
 #  output_dir: "data/voxconverse_dev_result"
-  device: "mps"
+  device: "cuda"
 audio:
   sr: 16000
 vad:
