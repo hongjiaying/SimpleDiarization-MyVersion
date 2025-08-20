@@ -14,7 +14,7 @@ vad:
   ref_vad: false
   merge_vad: false
   ref_suffix: ".lab"
-  pyannote_token: "YOUR_TOKEN_HERE"
+  pyannote_token: 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
   min_duration_on: 0.2
   min_duration_off: 0.2
 embedding:
