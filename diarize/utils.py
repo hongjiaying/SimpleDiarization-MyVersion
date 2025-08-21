@@ -56,22 +56,53 @@ def read_inputlist(input_list):
     return wav_list
 
 
-def write_rttm(SEC_tuples, out_rttm_file):
-    # Write the rttm file given SEC_tuples (start, end, cluster_id)
-    file_id = out_rttm_file.split('/')[-1].replace('.rttm', '')
-    place_holder = [
-        'SPEAKER', file_id, '1', '0', '0', '<NA>', '<NA>', '0', '<NA>', '<NA>'
-    ]
+# def write_rttm(SEC_tuples, out_rttm_file):
+#     # Write the rttm file given SEC_tuples (start, end, cluster_id)
+#     file_id = out_rttm_file.split('/')[-1].replace('.rttm', '')
+#     place_holder = [
+#         'SPEAKER', file_id, '1', '0', '0', '<NA>', '<NA>', '0', '<NA>', '<NA>'
+#     ]
+#
+#     with open(out_rttm_file, 'w') as f_output:
+#         for tup in SEC_tuples:
+#             place_holder[3] = "%.3f" % tup[0]
+#             place_holder[4] = "%.3f" % (tup[1] - tup[0])
+#             place_holder[7] = str(tup[2])
+#
+#             output_string = ' '.join(place_holder)
+#
+#             f_output.write(output_string + '\n')
 
-    with open(out_rttm_file, 'w') as f_output:
-        for tup in SEC_tuples:
-            place_holder[3] = "%.3f" % tup[0]
-            place_holder[4] = "%.3f" % (tup[1] - tup[0])
-            place_holder[7] = str(tup[2])
 
-            output_string = ' '.join(place_holder)
+#写的时候小于0.02s的段就不写了
+def write_rttm(SEC_tuples, out_rttm_file, min_dur=2e-2):
+    """
+    写 RTTM 时做防守：
+    - 统一保证 end >= start
+    - 计算 dur = end - start
+    - 丢弃 dur < min_dur 的片段（避免写出 0.000）
+      说明：默认 1e-3 秒（1ms）。如果评测仍报 0 时长，可把 min_dur 提到 1e-2。
+    SEC_tuples: [(start, end, cluster_id), ...]
+    """
+    file_id = os.path.splitext(os.path.basename(out_rttm_file))[0]
+    with open(out_rttm_file, 'w', encoding='utf-8') as f_output:
+        for st, en, spk in SEC_tuples:
+            st = float(st); en = float(en)
+            # 保障次序
+            if en < st:
+                st, en = en, st
+            dur = en - st
 
-            f_output.write(output_string + '\n')
+            # 过滤极短/零时长片段，避免 "dur=0.000"
+            if dur < min_dur:
+                continue
+
+            # 按 RTTM 规范输出（保留三位小数）
+            # SPEAKER <file_id> 1 <start> <dur> <NA> <NA> <spk> <NA> <NA>
+            f_output.write(
+                f"SPEAKER {file_id} 1 {st:.3f} {dur:.3f} <NA> <NA> {spk} <NA> <NA>\n"
+            )
+
 
 
 def read_vadfile(vad_file):

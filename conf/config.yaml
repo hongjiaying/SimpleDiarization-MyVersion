@@ -1,6 +1,12 @@
 misc:
-  input_list: "data/example.list"
-  output_dir: "data/example_result"
+#  input_list: "data/example.list"
+#  output_dir: "data/example_result"
+  input_list: "data/voxconverse_dev.list"
+  output_dir: "data/voxconverse_dev_result"
+#  input_list: "data/voxconverse_test.list"
+#  output_dir: "data/voxconverse_test_result"
+#  input_list: "data/voxconverse_dev_small.list"
+#  output_dir: "data/voxconverse_dev_result"
   device: "cuda"
 audio:
   sr: 16000
@@ -8,17 +14,43 @@ vad:
   ref_vad: false
   merge_vad: false
   ref_suffix: ".lab"
-  pyannote_token: PUT YOUR PYANNOTE TOKEN IN HERE
-  min_duration_on: 0.1
-  min_duration_off: 0.1
+  pyannote_token: "YOUR_TOKEN_HERE"
+  min_duration_on: 0.2
+  min_duration_off: 0.2
 embedding:
   win_length: 1.5
   hop_length: 0.5
+
+  win_length_list: [ 1.5, 1.0, 0.5]
+  hop_length_list: [ 0.75, 0.5, 0.25]
+  base_win: 0.5
+  base_hop: 0.25
+
 cluster:
   num_cluster: None
-  threshold: 0.8
-  normalize: false
+  threshold: 0.82
+  normalize: true
 eval:
   run: true
   collar: 0.25
   ignore_overlaps: false
+
+post:
+  min_turn: 0.10
+  merge_tol: 0.001
+  mode_filter: safer   # 可选: safer / majority
+  mode_k: 3           # 仅当 majority 时使用
+
+msdd:
+  enable: true
+  emb_dim: 192
+  lstm_hidden: 256
+  lstm_layers: 2
+  ckpt: "checkpoints/msdd.pt"
+  base_overlap_thr: 0.5
+  lr: 3.0e-4
+  batch_size: 1
+  max_epochs: 10
+  infer_thr: 0.5     # ↑ 推理阈值，下面补丁会用到
+
+
